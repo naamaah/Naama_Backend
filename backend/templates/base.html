@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title> <!--different title - call block--->
+    <link rel="stylesheet" href="=/static/style.css">
+</head>
+<body><!--different body  - call block--->
+    {% include 'header.html' %}
+
+    {% block body %}
+        <img src="/static/Me.jpeg" alt="Naama" width="130" height="170">
+
+    {% endblock %}
+
+    {% include 'footer.html' %}
+
+</body>
+</html>
