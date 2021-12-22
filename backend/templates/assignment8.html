@@ -6,28 +6,29 @@ assignmnet8
 
 {% block body %}
 {% set pageName='assignment8'%}
-    <h1>"Welcome to {{pageName}} Page"</h1>
+    <h1>Welcome to {{pageName}} Page</h1>
 
-    <h1>About Me</h1>
-    <h4>Name: {{ profile.name | default('unknown', true) | upper() }} {{ profile.lastName | default('unknown', true) | upper() }}</h4>
+    {% if session.username %}
+        <h2>welcome back, {{ session.username }}</h2>
+        <h4>Name: {{ profile.name | default('unknown', true) | upper() }} {{ profile.lastName | default('unknown', true) | upper() }}</h4>
 
-    <h4>University:{{ university | default('unknown', true) | upper()}}</h4> <!-- true - if the str is empty, the default will also apply--->
-    <h4>hobbies:</h4>
-    <ul>
-        {% for hobby in hobbies |sort %}
-            <li>{{ hobby }}</li>
-        {% endfor%}
-    </ul>
-
-    {% if currentTV %}
-        <h4>TV show:</h4>
+        <h4>University:{{ university | default('unknown', true) | upper()}}</h4> <!-- true - if the str is empty, the default will also apply--->
+        <h4>hobbies:</h4>
         <ul>
-            {% for show in currentTV |sort %}
-                <li>{{ show }}</li>
+            {% for hobby in hobbies |sort %}
+                <li>{{ hobby }}</li>
             {% endfor%}
         </ul>
-    {% endif%}
 
+        {% if currentTV %}
+            <h4>TV show:</h4>
+            <ul>
+                {% for show in currentTV |sort %}
+                    <li>{{ show }}</li>
+                {% endfor%}
+            </ul>
+        {% endif%}
+    {% endif%}
 
 {% endblock %}
 

@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 
 {% block title %}
-home CV
+home
 {% endblock %}
 
 {% block body %}
 {% set pageName='home'%}
-  <h1>"Welcome to {{pageName}} Page"</h1>
-    {{ super () }} <!--image-->
+    <h1>Welcome to {{pageName}} Page</h1>
+   {% if session.username %}
+      <h1>Welcome back {{ session.username }} </h1>
+      <h4>{{session.username}} pic</h4>
+      {{ super () }} <!--image-->
+    {% endif %}
 
 {% endblock %}
 
