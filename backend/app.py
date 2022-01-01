@@ -1,7 +1,10 @@
 from flask import Flask, redirect, render_template, request, session, url_for
+
 app=Flask(__name__)
 app.secret_key = '123'
 
+from Assignment10.Assignment10 import Assignment10
+app.register_blueprint(Assignment10)
 
 
 @app.route('/home')
