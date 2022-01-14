@@ -1,5 +1,5 @@
-from flask import redirect, render_template, request, Blueprint
-from backend.interact_with_DB import interact_db
+from flask import redirect, render_template, request, Blueprint, jsonify
+from interact_with_DB import interact_db
 
 # Assignment10 blueprint definition
 Assignment10 = Blueprint('Assignment10', __name__,
@@ -36,3 +36,5 @@ def delete_user_func():
     query= "DELETE FROM users WHERE email='%s'" % email
     interact_db(query, query_type='commit')
     return redirect('/Assignment10')
+
+

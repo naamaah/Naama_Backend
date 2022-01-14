@@ -1,4 +1,6 @@
-from flask import Flask, redirect, render_template, request, session, url_for
+import requests
+from flask import Flask, redirect, render_template, request, session, url_for, jsonify
+from interact_with_DB import interact_db
 
 app=Flask(__name__)
 app.secret_key = '123'
@@ -59,6 +61,48 @@ def assignment9Func ():
 def logOutFunc ():
     session['username'] = ''
     return redirect (url_for('assignment9Func'))
+
+##assignment11 functions:
+@app.route('/assignment11/users')
+def show_users_json():
+    query = "select * from users"
+    query_result = interact_db(query=query, query_type='fetch')
+    return_dict={}
+    for user in query_result:
+        return_dict[f'user{user.id}'] = {
+                       'name': user.Name,
+                       'email': user.Email}
+
+    return jsonify(return_dict)
+
+# @app.route('/assignment11/outer_source/', defaults={'id': -1})
+# @app.route('/assignment11/outer_source/<int:id>')
+# def show_single_users(id):
+#     print(id)
+#     if id==-1:
+#         return redirect(url_for('show_users_json'))
+#     else:
+#         query = "select * FROM users WHERE id='%s'" % id
+#         query_result = interact_db(query=query, query_type='fetch')
+#         if len(query_result) == 0:
+#             return_dict = {'status': 'failed', 'message': 'user not found'}
+#         else:
+#             return_dict = {'ID': query_result[0].id,
+#                        'name': query_result[0].Name,
+#                        'email': query_result[0].Email}
+#         return jsonify(return_dict)
+def get_user_By_Id(user_id):
+    user = requests.get(f' https://reqres.in/api/users/{user_id}')
+    user = user.json()
+    return user
+
+@app.route('/assignment11/outer_source', methods=['GET', 'POST'])
+def ass11_outer_source():
+    if request.method == 'POST':
+        user_id = request.form['id']
+        user_return = get_user_By_Id(user_id)
+        return render_template('assignment11.html', user_return=user_return)
+    return render_template('assignment11.html')
 
 
 if __name__ == "__main__":

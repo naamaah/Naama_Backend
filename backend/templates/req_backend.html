@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    home
+{% endblock %}
+
+{% block body %}
+    {% set pageName='req_backend' %}
+    <h1>welcome to {{ pageName }} page</h1>
+
+    <h2>please insert id to find the user<</h2>
+    <form method="POST" action="/assignment11/outer_source">
+        id: <input name="id" type=text"><br>
+        <input type="submit" value="find user">
+    </form>
+    {% if user_return %}
+        <h5> user id: {{ user_return.id }} </h5>
+        <h5> first_name: {{ user_return.first_name }}</h5>
+        <h5> last_name:  {{ user_return.last_name}}</h5>
+        <h5> email: {{ user_return.email }}</h5>
+        <img src="{{ user_return.avatar }}" alt="pic">
+
+    {% endif %}
+
+{% endblock %}
+

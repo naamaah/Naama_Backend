@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} fronted {% endblock %}
+
+{% block body %}
+    <h1>This is the req</h1>
+    <h3>please insert id to find the user</h3>
+    id: <input name="id" type=text"><br>
+    <h2>Users list <button onclick="findUser()">Get users</button></h2>
+
+    <script src="../static/JS/fetch_example.js"></script>
+
+
+{% endblock %}
+

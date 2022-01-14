@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} assignment11 {% endblock %}
+
+{% block body %}
+    <h1>This is the Fronted</h1>
+    <h3>please insert id to find the user</h3>
+    id: <input name="id" type=text" id="idFron"><br>
+    <button onclick="findUser('idFron')">Get user</button>
+    <script src="../static/JS/fetch_example.js"></script>
+
+    <h1>This is the backend</h1>
+    <h2>please insert id to find the user</h2>
+    <form method="POST" action="/assignment11/outer_source">
+        id: <input name="id" type=text"><br>
+        <input type="submit" value="find user">
+    </form>
+    {% if user_return %}
+        <h5> user id: {{ user_return.data.id }} </h5>
+        <h5> first_name: {{ user_return.data.first_name }}</h5>
+        <h5> last_name:  {{ user_return.data.last_name}}</h5>
+        <h5> email: {{ user_return.data.email }}</h5>
+        <img src="{{ user_return.data.avatar }}" alt="pic">
+
+    {% endif %}
+{% endblock %}
+
